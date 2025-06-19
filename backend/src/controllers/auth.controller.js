@@ -97,7 +97,7 @@ export async function login(req, res) {
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: 1 * 60 * 60 * 1000, //1hr
       sameSite: "strict",
     });
 
@@ -112,6 +112,8 @@ export function logout(req, res) {
   res.clearCookie("jwt");
   res.status(200).json({ success: true, message: "Logged out successfully" });
 }
+
+
 
 export async function onboard(req, res) {
   try {
