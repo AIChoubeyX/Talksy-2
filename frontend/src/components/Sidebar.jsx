@@ -71,6 +71,7 @@ import {
   UsersIcon,
   BrainIcon,
   LanguagesIcon,
+  PhoneCallIcon
 } from "lucide-react"; // 👈 Make sure BrainIcon is imported
 
 const Sidebar = () => {
@@ -129,6 +130,8 @@ const Sidebar = () => {
           <LanguagesIcon className="size-5 text-base-content opacity-70" />
           <span>AI Translate</span>
         </Link>
+
+       
       </nav>
 
       {/* USER PROFILE SECTION */}
@@ -153,5 +156,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-

@@ -100,3 +100,5 @@ export const askGeminiChat = async (prompt) => {
   if (!res.ok) throw new Error("Failed to get AI response");
   return res.json();
 };
+
+
