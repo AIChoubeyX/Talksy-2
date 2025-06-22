@@ -101,4 +101,17 @@ export const askGeminiChat = async (prompt) => {
   return res.json();
 };
 
+//settings
+
+// ✅ REPLACE this in userApi.js
+export const updateUserProfile = async (data) => {
+  const res = await axiosInstance.put("/users/update-profile", data);
+  return res.data;
+};
+
+export const getUserProfile = async () => {
+  const res = await axiosInstance.get("/users/profile"); // ✅ no ID
+  return res.data;
+};
+
 

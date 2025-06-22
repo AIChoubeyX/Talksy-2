@@ -9,7 +9,6 @@
 // import OnboardingPage from "./pages/OnboardingPage.jsx";
 // // import AIChatPage from "./pages/AIChatPage";
 
-
 // import { Toaster } from "react-hot-toast";
 
 // import PageLoader from "./components/PageLoader.jsx";
@@ -33,8 +32,8 @@
 //           path="/"
 //           element={
 //             isAuthenticated && isOnboarded ? (
-//               <Layout 
-             
+//               <Layout
+
 //                  showSidebar={true}>
 //                 <HomePage />
 //               </Layout>
@@ -106,10 +105,6 @@
 //           }
 //         />
 
-      
-
-
-
 //       </Routes>
 
 //       <Toaster />
@@ -117,8 +112,6 @@
 //   );
 // };
 // export default App;
-
-
 
 import { Navigate, Route, Routes } from "react-router";
 
@@ -130,6 +123,7 @@ import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnBoardingPage.jsx";
 import AIChatPage from "./pages/AIChatPage.jsx"; // ✅ added AIChat page
+import SettingsPage from "./pages/SettingsPage.jsx"; // ✅ added Settings page
 
 import { Toaster } from "react-hot-toast";
 
@@ -144,7 +138,6 @@ import "@copilotkit/react-ui/styles.css";
 // ✅ CopilotKit Integration END
 import AITranslatePage from "./pages/AITranslatePage.jsx";
 
-
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const { theme } = useThemeStore();
@@ -156,8 +149,8 @@ const App = () => {
 
   return (
     // ✅ CopilotKit Integration START
-    <CopilotKit  publicApiKey={import.meta.env.VITE_COPILOT_PUBLIC_API_KEY}>
-    {/* ✅ CopilotKit Integration END */}
+    <CopilotKit publicApiKey={import.meta.env.VITE_COPILOT_PUBLIC_API_KEY}>
+      {/* ✅ CopilotKit Integration END */}
 
       <div className="h-screen" data-theme={theme}>
         <Routes>
@@ -176,13 +169,21 @@ const App = () => {
           <Route
             path="/signup"
             element={
-              !isAuthenticated ? <SignUpPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+              !isAuthenticated ? (
+                <SignUpPage />
+              ) : (
+                <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+              )
             }
           />
           <Route
             path="/login"
             element={
-              !isAuthenticated ? <LoginPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+              !isAuthenticated ? (
+                <LoginPage />
+              ) : (
+                <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+              )
             }
           />
           <Route
@@ -233,8 +234,21 @@ const App = () => {
               )
             }
           />
+          //settings page
+          <Route
+            path="/settings"
+            element={
+              isAuthenticated && isOnboarded ? (
+                <Layout showSidebar={true}>
+                  <SettingsPage />
+                </Layout>
+              ) : (
+                <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+              )
+            }
+          />
+          //ai translate page
           <Route path="/ai-translate" element={<AITranslatePage />} />
-
           {/* ✅ NEW AI CHAT ROUTE */}
           <Route
             path="/ai-chat"
@@ -248,13 +262,12 @@ const App = () => {
               )
             }
           />
-
         </Routes>
 
         <Toaster />
       </div>
 
-    {/* ✅ CopilotKit Integration END */}
+      {/* ✅ CopilotKit Integration END */}
     </CopilotKit>
   );
 };
