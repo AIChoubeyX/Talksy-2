@@ -124,6 +124,7 @@ import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnBoardingPage.jsx";
 import AIChatPage from "./pages/AIChatPage.jsx"; // ✅ added AIChat page
 import SettingsPage from "./pages/SettingsPage.jsx"; // ✅ added Settings page
+import AITranslatePage from "./pages/AITranslatePage.jsx";
 
 import { Toaster } from "react-hot-toast";
 
@@ -136,7 +137,7 @@ import { useThemeStore } from "./store/useThemeStore.js";
 import { CopilotKit } from "@copilotkit/react-core";
 import "@copilotkit/react-ui/styles.css";
 // ✅ CopilotKit Integration END
-import AITranslatePage from "./pages/AITranslatePage.jsx";
+// import AITranslatePage from "./pages/AITranslatePage.jsx";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -248,8 +249,16 @@ const App = () => {
             }
           />
           //ai translate page
-          <Route path="/ai-translate" element={<AITranslatePage />} />
-          {/* ✅ NEW AI CHAT ROUTE */}
+          <Route path="/ai-translate" element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true} >
+                <AITranslatePage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          } />
+          
           <Route
             path="/ai-chat"
             element={

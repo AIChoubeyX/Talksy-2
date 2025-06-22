@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useAuthUser from "../hooks/useAuthUser";
 import { getUserProfile, updateUserProfile } from "../lib/api";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 import {
   LoaderIcon,
@@ -16,6 +18,8 @@ import { LANGUAGES } from "../constants";
 
 export default function Settings() {
   const { authUser } = useAuthUser();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -64,14 +68,31 @@ export default function Settings() {
     toast.success("New avatar generated!");
   };
 
+  // const handleSave = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     await updateUserProfile(formData); // ✅ no userId required
+  //     toast.success("Profile updated successfully!");
+  //   } catch (err) {
+  //     console.error(err);
+  //     toast.error("Update failed");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSave = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await updateUserProfile(formData); // ✅ no userId required
+      await updateUserProfile(formData);
       toast.success("Profile updated successfully!");
+
+      // ✅ This will auto-refresh HomePage
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+      navigate("/"); // ✅ step 3 — Redirect to homepage
     } catch (err) {
-      console.error(err);
       toast.error("Update failed");
     } finally {
       setLoading(false);
@@ -84,7 +105,9 @@ export default function Settings() {
         <div className="card-body p-6 sm:p-8">
           <div className="flex justify-center items-center gap-2 mb-4">
             <LanguagesIcon className="text-primary size-8" />
-            <h1 className="text-3xl font-bold text-center">Edit Your Profile</h1>
+            <h1 className="text-3xl font-bold text-center">
+              Edit Your Profile
+            </h1>
           </div>
 
           <form onSubmit={handleSave} className="space-y-6">
@@ -103,7 +126,11 @@ export default function Settings() {
                   </div>
                 )}
               </div>
-              <button type="button" onClick={handleRandomAvatar} className="btn btn-accent">
+              <button
+                type="button"
+                onClick={handleRandomAvatar}
+                className="btn btn-accent"
+              >
                 <ShuffleIcon className="size-4 mr-2" />
                 Generate Random Avatar
               </button>
@@ -182,7 +209,11 @@ export default function Settings() {
             </div>
 
             {/* Submit */}
-            <button type="submit" className="btn btn-primary w-full" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              disabled={loading}
+            >
               {!loading ? (
                 <>
                   <SaveIcon className="size-5 mr-2" />
