@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShipWheelIcon } from "lucide-react";
 import { Link } from "react-router";
 import useLogin from "../hooks/useLogin";
@@ -27,6 +27,17 @@ const LoginPage = () => {
     e.preventDefault();
     loginMutation(loginData);
   };
+
+  // const animationFiles = [
+  //   "/Learning languages.mp4",
+  //   "/Language languages(1).mp4",
+  // ];
+  // const [animation, setAnimation] = useState(animationFiles[0]);
+
+  // useEffect(() => {
+  //   const randomIndex = Math.floor(Math.random() * animationFiles.length);
+  //   setAnimation(animationFiles[randomIndex]);
+  // }, []);
 
   return (
     <div
@@ -71,7 +82,9 @@ const LoginPage = () => {
                       placeholder="hello@example.com"
                       className="input input-bordered w-full"
                       value={loginData.email}
-                      onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, email: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -85,12 +98,18 @@ const LoginPage = () => {
                       placeholder="••••••••"
                       className="input input-bordered w-full"
                       value={loginData.password}
-                      onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, password: e.target.value })
+                      }
                       required
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-primary w-full" disabled={isPending}>
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-full"
+                    disabled={isPending}
+                  >
                     {isPending ? (
                       <>
                         <span className="loading loading-spinner loading-xs"></span>
@@ -104,7 +123,10 @@ const LoginPage = () => {
                   <div className="text-center mt-4">
                     <p className="text-sm">
                       Don't have an account?{" "}
-                      <Link to="/signup" className="text-primary hover:underline">
+                      <Link
+                        to="/signup"
+                        className="text-primary hover:underline"
+                      >
                         Create one
                       </Link>
                     </p>
@@ -119,14 +141,27 @@ const LoginPage = () => {
         <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
           <div className="max-w-md p-8">
             {/* Illustration */}
-            <div className="relative aspect-square max-w-sm mx-auto">
+            {/* <div className="relative aspect-square max-w-sm mx-auto">
               <img src="/i.png" alt="Language connection illustration" className="w-full h-full" />
-            </div>
+            </div> */}
+            {/* <div className="relative aspect-square max-w-sm mx-auto"> */}
+            <video
+              src="/Learning languages.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full"
+            />
+            {/* </div> */}
 
             <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
+              <h2 className="text-xl font-semibold">
+                Connect with language partners worldwide
+              </h2>
               <p className="opacity-70">
-                Practice conversations, make friends, and improve your language skills together
+                Practice conversations, make friends, and improve your language
+                skills together
               </p>
             </div>
           </div>

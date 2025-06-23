@@ -171,7 +171,7 @@ return (
       {/* <Lottie animationData={speakingGlobe} loop={true} className="h-40 mx-auto" /> */}
 
       <div>
-        <h1 className="text-4xl font-extrabold text-gray-800">🌍 AI Translate</h1>
+        <h1 className="text-4xl font-extrabold text-gray-800">🌍 Talksy Translate</h1>
         <p className="text-sm text-gray-500 mt-2">Type or speak a sentence, and let AI handle the translation!</p>
       </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShipWheelIcon } from "lucide-react";
 import { Link } from "react-router";
 
@@ -29,6 +29,17 @@ const SignUpPage = () => {
     e.preventDefault();
     signupMutation(signupData);
   };
+
+  //  const animationFiles = [
+  //     "/Learning languages.mp4",
+  //     "/Learning languages(1).mp4",
+  // ];
+  //  const [animation, setAnimation] = useState(animationFiles[0]);
+  
+  //   useEffect(() => {
+  //     const randomIndex = Math.floor(Math.random() * animationFiles.length);
+  //     setAnimation(animationFiles[randomIndex]);
+  //   }, []);
 
   return (
     <div
@@ -171,10 +182,20 @@ const SignUpPage = () => {
         <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
           <div className="max-w-md p-8">
             {/* Illustration */}
-            <div className="relative aspect-square max-w-sm mx-auto">
+            {/* <div className="relative aspect-square max-w-sm mx-auto">
               <img
                 src="/i.png"
                 alt="Language connection illustration"
+                className="w-full h-full"
+              />
+            </div> */}
+            <div className="relative aspect-square max-w-sm mx-auto">
+              <video
+                src="Learning languages(1).mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full"
               />
             </div>
