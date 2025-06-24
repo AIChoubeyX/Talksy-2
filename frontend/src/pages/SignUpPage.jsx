@@ -191,7 +191,7 @@ const SignUpPage = () => {
             </div> */}
             <div className="relative aspect-square max-w-sm mx-auto">
               <video
-                src="Learning languages(1).mp4"
+                src="Learning languages.mp4"
                 autoPlay
                 loop
                 muted

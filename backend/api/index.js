@@ -41,17 +41,17 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 // import path from "path";  
 
-import authRoutes from "./routes/auth.route.js";
-import userRoutes from "./routes/user.route.js";
-import chatRoutes from "./routes/chat.route.js";
+import authRoutes from "../src/routes/auth.route.js";
+import userRoutes from "../src/routes/user.route.js";
+import chatRoutes from "../src/routes/chat.route.js";
 
 // ✅ AI Chat START – import the new route
-import aiChatRoutes from "./routes/aiChat.route.js";
+import aiChatRoutes from "../src/routes/aiChat.route.js";
 // ✅ AI Chat END
 
-import translateRoutes from "./routes/translate.routes.js";
+import translateRoutes from "../src/routes/translate.routes.js";
 
-import { connectDB } from "./lib/db.js";
+import { connectDB } from "../src/lib/db.js";
 
 dotenv.config();
 
@@ -87,5 +87,5 @@ app.listen(PORT, () => {
   connectDB();
 });
 
-
+export default app;
 
